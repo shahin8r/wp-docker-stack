@@ -1,5 +1,20 @@
 # wp-docker-stack
 
+## Features
+
+- nginx
+- MariaDB
+- WordPress
+- WP-CLI
+- MailCatcher
+- Composer
+- Memcached
+- phpMyAdmin
+- phpMemcachedAdmin
+- PHPUnit
+
+## Folder Structure
+
 - `wordpress/` contains the WordPress files.
 - `logs/` contains the logs.
 - `data/` contains the database files.
