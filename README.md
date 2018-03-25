@@ -2,9 +2,10 @@
 
 ## Features
 
+- WordPress
 - nginx
 - MariaDB
-- WordPress
+- PHP-FPM 7.2
 - WP-CLI
 - MailCatcher
 - Composer
@@ -12,10 +13,12 @@
 - phpMyAdmin
 - phpMemcachedAdmin
 - PHPUnit
+- Xdebug
 
 ## Folder Structure
 
 - `wordpress/` contains the WordPress files.
+- `config/` contains the config files.
 - `logs/` contains the logs.
 - `data/` contains the database files.
 
@@ -62,6 +65,10 @@ Run the `shell.sh` shell script inside of `bin/`.
 
 ```
 ./bin/shell.sh
+```
+By default the shell runs as `www-data` but you can also run as other users. Following command will run the shell as `root`.
+```
+./bin/shell.sh root
 ```
 
 ## Import DB
