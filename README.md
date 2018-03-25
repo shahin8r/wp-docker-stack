@@ -75,3 +75,7 @@ You can also search-replace the site URL in the new database.
 ```
 ./bin/wp_db_restore.sh import.sql '//oldsite.com' '//localhost'
 ```
+
+## Credits
+- [pcfreak30/wpstack](https://github.com/pcfreak30/wpstack)
+- [10up/wp-local-docker](https://github.com/10up/wp-local-docker/)
