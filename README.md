@@ -1,4 +1,9 @@
 # wp-docker-stack
+
+- `wordpress/` contains the WordPress files.
+- `logs/` contains the logs.
+- `data/` contains the database files.
+
 ## Requirements
 
 * [Docker](https://www.docker.com/)
@@ -37,6 +42,8 @@ Run the `wp.sh` shell script inside of `bin/`. Following command will execute as
 ```
 
 ## Bash access
+
+Run the `shell.sh` shell script inside of `bin/`.
 
 ```
 ./bin/shell.sh
