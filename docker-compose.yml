@@ -1,0 +1,73 @@
+version: '3'
+services:
+  wordpress:
+    build: .
+    links:
+      - mariadb:mysql 
+    ports:
+      - "9000:9000"
+    volumes:
+      - "./wordpress:/var/www/html"
+      - "./config/php/php.ini:/usr/local/etc/php/php.ini"
+      - "./config/php/docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      - ~/.ssh:/root/.ssh
+    environment:
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=wp_
+      - WORDPRESS_DB_PASSWORD=password
+    restart: always
+  mariadb:
+    image: mariadb:latest
+    volumes:
+      - "./data/db:/var/lib/mysql"
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+  mailcatcher:
+     image: schickling/mailcatcher
+     restart: always
+     ports:
+       - "1025:1025"
+       - "1080:1080"
+     environment:
+       MAILCATCHER_PORT: 1025
+  memcached:
+    image: memcached:latest
+    restart: always
+  nginx:
+    ports:
+      - "80:80"
+      - "443:443"
+    image: nginx:latest
+    links:
+      - wordpress
+    volumes:
+      - "./wordpress:/var/www/html"
+      - "./config/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./config/certs:/etc/nginx/certs"
+      - "./logs/nginx:/var/log/nginx"
+    restart: always
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - mariadb:db
+    ports:
+      - "8092:80"
+    depends_on:
+      - mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+  phpmemcacheadmin:
+    image: hitwe/phpmemcachedadmin
+    ports:
+      - "8093:80"
+    depends_on:
+      - memcached
