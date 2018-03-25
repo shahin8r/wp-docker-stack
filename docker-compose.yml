@@ -65,7 +65,7 @@ services:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: password
-  phpmemcacheadmin:
+  phpmemcachedadmin:
     image: hitwe/phpmemcachedadmin
     ports:
       - "8093:80"
